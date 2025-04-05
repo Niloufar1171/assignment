@@ -1,0 +1,119 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" ng-app="crudApp">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Employee CRUD App</title>-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>-->
+<!--    <style>-->
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--        }-->
+<!--        table, th, td {-->
+<!--            border: 1px solid black;-->
+<!--        }-->
+<!--        th, td {-->
+<!--            padding: 10px;-->
+<!--            text-align: left;-->
+<!--        }-->
+<!--        button {-->
+<!--            margin-right: 5px;-->
+<!--        }-->
+<!--        tr:hover {-->
+<!--            background-color: #f2f2f2;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body ng-controller="EmployeeController">-->
+<!--<h2>Employee Management</h2>-->
+
+<!--<form ng-submit="addOrUpdateEmployee()">-->
+<!--    <label>First Name:</label>-->
+<!--    <input type="text" ng-model="employee.firstName" required>-->
+<!--    <label>Last Name:</label>-->
+<!--    <input type="text" ng-model="employee.lastName" required>-->
+<!--    <label>Salary:</label>-->
+<!--    <input type="number" ng-model="employee.salary" required>-->
+<!--    <button type="submit">{{ employee.id ? 'Update' : 'Add' }}</button>-->
+<!--</form>-->
+
+<!--<button ng-click="fetchEmployee()">Get Employee</button>-->
+<!--<button ng-click="deleteEmployee(employee.id)" ng-disabled="!employee.id">Delete</button>-->
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>First Name</th>-->
+<!--        <th>Last Name</th>-->
+<!--        <th>Salary</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--        <td>{{ employee.id }}</td>-->
+<!--        <td>{{ employee.firstName }}</td>-->
+<!--        <td>{{ employee.lastName }}</td>-->
+<!--        <td>{{ employee.salary }}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--<script>-->
+<!--        var app = angular.module('crudApp', []);-->
+
+<!--        app.controller('EmployeeController', function($scope, $http) {-->
+<!--            // Initialize employee model (without id)-->
+<!--            $scope.employee = {-->
+<!--                firstName: '',-->
+<!--                lastName: '',-->
+<!--                salary: null-->
+<!--            };-->
+
+<!--            // Fetch a single employee from the backend-->
+<!--            $scope.fetchEmployee = function() {-->
+<!--                $http.get('/api/employee').then(response => {-->
+<!--                    console.log("Employee fetched:", response.data);-->
+<!--                    $scope.employee = response.data;-->
+<!--                }).catch(error => console.error("Error fetching employee:", error));-->
+<!--            };-->
+
+<!--            // Add or update employee-->
+<!--            $scope.addOrUpdateEmployee = function() {-->
+<!--                if ($scope.employee.id) {-->
+<!--                    // Update existing employee (ID is automatically generated)-->
+<!--                    $http.put('/api/employee/' + $scope.employee.id, $scope.employee).then(response => {-->
+<!--                        console.log("Employee updated:", response.data);-->
+<!--                        $scope.fetchEmployee();-->
+<!--                    }).catch(error => console.error("Error updating employee:", error));-->
+<!--                } else {-->
+<!--                    // Add new employee (ID is automatically generated)-->
+<!--                    $http.post('/api/employee', $scope.employee).then(response => {-->
+<!--                        console.log("Employee added:", response.data);-->
+<!--                        $scope.fetchEmployee();-->
+<!--                    }).catch(error => console.error("Error adding employee:", error));-->
+<!--                }-->
+
+<!--                // Reset employee model after add/update-->
+<!--                $scope.employee = {-->
+<!--                    firstName: '',-->
+<!--                    lastName: '',-->
+<!--                    salary: null-->
+<!--                };-->
+<!--            };-->
+
+<!--            // Delete employee-->
+<!--            $scope.deleteEmployee = function(id) {-->
+<!--                if (id) {-->
+<!--                    $http.delete('/api/employee/' + id).then(response => {-->
+<!--                        console.log("Employee deleted:", response.data);-->
+<!--                        $scope.employee = {}; // Reset employee data after deletion-->
+<!--                    }).catch(error => console.error("Error deleting employee:", error));-->
+<!--                }-->
+<!--            };-->
+<!--        });-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
